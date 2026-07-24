@@ -104,13 +104,10 @@ function checkWinner(){
   return canMove?null:(turn==="hell"?"heaven":"hell");
 }
 function pieceHTML(p){
+  const src=p.side==="heaven"?"assets/ice-guardian.png":"assets/fire-guardian.png";
+  const label=p.side==="heaven"?"หมากน้ำแข็ง":"หมากเพลิง";
   return `<div class="piece ${p.side} ${p.king?"king":""}">
-    <div class="base"></div>
-    <div class="figure">
-      <div class="crown"></div>
-      ${p.side==="heaven"?'<div class="wing l"></div><div class="wing r"></div>':'<div class="horn l"></div><div class="horn r"></div><div class="wing l"></div><div class="wing r"></div>'}
-      <div class="head"></div><div class="torso"></div><div class="legs"></div><div class="spear"></div>
-    </div>
+    <img class="pieceSprite" src="${src}" alt="${label}">
   </div>`;
 }
 function render(){
@@ -130,8 +127,8 @@ function render(){
   const hc=pieces("heaven").length,dc=pieces("hell").length;
   heavenCountEl.textContent=hc;hellCountEl.textContent=dc;
   activeCountEl.textContent=turn==="heaven"?hc:dc;
-  turnNameEl.textContent=turn==="heaven"?"ฝ่ายเทพ":"ฝ่ายอสูร";
-  turnAvatarEl.textContent=turn==="heaven"?"😇":"👹";
+  turnNameEl.textContent=turn==="heaven"?"ฝ่ายน้ำแข็ง":"ฝ่ายเพลิง";
+  turnAvatarEl.textContent=turn==="heaven"?"❄":"🔥";
   turnAvatarEl.className=`avatar ${turn}`;
   const color=turn==="heaven"?"#88d7ff":"#ff624f";
   turnDotEl.style.background=color;turnDotEl.style.color=color;
@@ -139,7 +136,7 @@ function render(){
 function setStatus(t){statusEl.textContent=t}
 function toast(t){toastEl.textContent=t;toastEl.classList.add("show");clearTimeout(toastEl._t);toastEl._t=setTimeout(()=>toastEl.classList.remove("show"),1800)}
 function showWinner(side){
-  gameOver=true;document.getElementById("winnerTitle").textContent=`${side==="heaven"?"ฝ่ายเทพ":"ฝ่ายอสูร"}ชนะ!`;
+  gameOver=true;document.getElementById("winnerTitle").textContent=`${side==="heaven"?"ฝ่ายน้ำแข็ง":"ฝ่ายเพลิง"}ชนะ!`;
   winModal.classList.add("show");beep(880,.18);setTimeout(()=>beep(1040,.22),180);
 }
 function beep(freq,duration){
@@ -158,4 +155,14 @@ document.getElementById("focusBtn").onclick=()=>{
   document.querySelector(".arena").scrollIntoView({behavior:"smooth",block:"start"});
   toast("โฟกัสที่กระดานแล้ว");
 };
+const embersEl=document.getElementById("embers");
+for(let i=0;i<26;i++){
+  const ember=document.createElement("i");
+  ember.className="ember";
+  ember.style.left=`${Math.random()*100}%`;
+  ember.style.setProperty("--d",`${4+Math.random()*5}s`);
+  ember.style.setProperty("--delay",`${-Math.random()*9}s`);
+  ember.style.setProperty("--drift",`${-40+Math.random()*80}px`);
+  embersEl.appendChild(ember);
+}
 resetGame();
