@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Heaven vs Hell — Thai Checkers</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="shell">
+  <header class="header">
+    <div class="logoBlock">
+      <div class="emblem">⚔️</div>
+      <div>
+        <h1 class="title">HEAVEN <span class="vs">VS</span> HELL</h1>
+        <div class="subtitle">หมากฮอสไทย · ศึกชิงแดนสวรรค์และนรก</div>
+      </div>
+    </div>
+    <div class="headerActions">
+      <button id="soundBtn">🔊 <span>เสียง</span></button>
+      <button id="newBtn" class="gold">เริ่มใหม่</button>
+    </div>
+  </header>
+
+  <main class="game">
+    <section class="arena">
+      <div class="realmLabel heaven">CELESTIAL REALM</div>
+      <div class="realmLabel hell">INFERNAL REALM</div>
+      <div id="board" class="board" aria-label="กระดานหมากฮอส"></div>
+      <div class="rift"></div>
+    </section>
+
+    <aside class="side">
+      <section class="card playerCard">
+        <div class="playerHead">
+          <div class="playerInfo">
+            <div id="turnAvatar" class="avatar hell">👹</div>
+            <div>
+              <div id="turnName" class="playerName">ฝ่ายอสูร</div>
+              <div class="playerSub">กำลังเป็นฝ่ายเดิน</div>
+            </div>
+          </div>
+          <div id="activeCount" class="count">8</div>
+        </div>
+        <div class="turnBanner">
+          <span id="turnDot" class="turnDot" style="background:#ff624f;color:#ff624f"></span>
+          <span id="status">เลือกตัวหมากเพื่อเริ่มเดิน</span>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="playerInfo" style="justify-content:space-between">
+          <div class="playerInfo">
+            <div class="avatar heaven">😇</div>
+            <div><div class="playerName">ฝ่ายเทพ</div><div class="playerSub">Celestial Guard</div></div>
+          </div>
+          <div id="heavenCount" class="count">8</div>
+        </div>
+        <div class="playerInfo" style="justify-content:space-between;margin-top:13px;padding-top:13px;border-top:1px solid rgba(255,255,255,.08)">
+          <div class="playerInfo">
+            <div class="avatar hell">👹</div>
+            <div><div class="playerName">ฝ่ายอสูร</div><div class="playerSub">Infernal Legion</div></div>
+          </div>
+          <div id="hellCount" class="count">8</div>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="rulesTitle">วิธีเล่น</div>
+        <div class="status"><strong>จุดสีทอง</strong> คือช่องเดิน และ <strong>จุดสีแดง</strong> คือช่องที่ต้องกิน</div>
+        <div class="miniActions">
+          <button id="rulesBtn">กติกา</button>
+          <button id="focusBtn">เต็มกระดาน</button>
+        </div>
+        <div class="footerHint">เล่น 2 คนในเครื่องเดียวกัน</div>
+      </section>
+    </aside>
+  </main>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<div id="rulesModal" class="modal">
+  <div class="modalBox">
+    <div style="font-size:46px">📜</div>
+    <h2>กติกาเกม</h2>
+    <ul class="rules" style="text-align:left;font-size:14px">
+      <li>ฝ่ายอสูรเริ่มก่อน</li>
+      <li>หมากธรรมดาเดินและกินเฉียงไปด้านหน้า</li>
+      <li>เมื่อมีทางกิน ผู้เล่นต้องเลือกกิน</li>
+      <li>ถ้ากินต่อได้ ต้องเดินต่อด้วยตัวเดิม</li>
+      <li>ตัวฮอสเดินเฉียงได้หลายช่อง และลงหลังตัวที่กินทันที</li>
+      <li>จับหมากหมด หรือทำให้คู่แข่งเดินไม่ได้ เป็นฝ่ายชนะ</li>
+    </ul>
+    <button id="closeRules" class="gold" style="margin-top:16px">เข้าใจแล้ว</button>
+  </div>
+</div>
+
+<div id="winModal" class="modal">
+  <div class="modalBox">
+    <div style="font-size:56px">🏆</div>
+    <h2 id="winnerTitle">ฝ่ายเทพชนะ!</h2>
+    <p>คู่ต่อสู้ไม่มีหมากหรือไม่มีทางเดินเหลือแล้ว</p>
+    <button id="playAgainBtn" class="gold">เล่นอีกครั้ง</button>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
